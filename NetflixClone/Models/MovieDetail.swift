@@ -9,6 +9,7 @@ import Foundation
 
 struct MovieDetail: Codable {
     let Title: String?
+    let Year: String?
     let Runtime: String?
     let imdbRating: String?
     let Poster: String?

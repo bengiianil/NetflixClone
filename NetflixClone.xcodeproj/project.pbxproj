@@ -13,6 +13,7 @@
 		B910A2B62B697C26000B9293 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B910A2B52B697C26000B9293 /* Preview Assets.xcassets */; };
 		B910A2BD2B697CE7000B9293 /* MovieDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = B910A2BC2B697CE7000B9293 /* MovieDetail.swift */; };
 		B910A2BF2B697CF8000B9293 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B910A2BE2B697CF8000B9293 /* NetworkManager.swift */; };
+		B910A2C42B6988BE000B9293 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B910A2C32B6988BE000B9293 /* ViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		B910A2B52B697C26000B9293 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B910A2BC2B697CE7000B9293 /* MovieDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetail.swift; sourceTree = "<group>"; };
 		B910A2BE2B697CF8000B9293 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		B910A2C32B6988BE000B9293 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				B910A2C12B698083000B9293 /* Models */,
 				B910A2C02B698075000B9293 /* Views */,
 				B910A2B42B697C26000B9293 /* Preview Content */,
+				B910A2C32B6988BE000B9293 /* ViewModel.swift */,
 			);
 			path = NetflixClone;
 			sourceTree = "<group>";
@@ -167,6 +170,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B910A2C42B6988BE000B9293 /* ViewModel.swift in Sources */,
 				B910A2BF2B697CF8000B9293 /* NetworkManager.swift in Sources */,
 				B910A2BD2B697CE7000B9293 /* MovieDetail.swift in Sources */,
 				B910A2B12B697C26000B9293 /* ContentView.swift in Sources */,

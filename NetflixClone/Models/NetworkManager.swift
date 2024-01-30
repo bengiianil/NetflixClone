@@ -15,8 +15,8 @@ enum AppError: Error {
 
 class NetworkManager {
     
-    func fetchMovieDetail() async throws -> MovieDetail {
-        guard let url = URL(string: "https://www.omdbapi.com/?i=tt3896198&apikey=edc960e") else {
+    func fetchData<T: Decodable>(for: T.Type, from urlString: String) async throws -> T {
+        guard let url = URL(string: urlString) else {
             throw AppError.invalidUrl
         }
         
@@ -28,7 +28,7 @@ class NetworkManager {
                 throw AppError.invalidResponse
             }
             
-            let decodedData = try JSONDecoder().decode(MovieDetail.self, from: data)
+            let decodedData = try JSONDecoder().decode(T.self, from: data)
             return decodedData
             
         } catch {
