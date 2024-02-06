@@ -14,6 +14,7 @@
 		B910A2BD2B697CE7000B9293 /* MovieDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = B910A2BC2B697CE7000B9293 /* MovieDetail.swift */; };
 		B910A2BF2B697CF8000B9293 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B910A2BE2B697CF8000B9293 /* NetworkManager.swift */; };
 		B910A2C42B6988BE000B9293 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B910A2C32B6988BE000B9293 /* ViewModel.swift */; };
+		B910A2CD2B6ABE99000B9293 /* MoviesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B910A2CC2B6ABE99000B9293 /* MoviesList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		B910A2BC2B697CE7000B9293 /* MovieDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetail.swift; sourceTree = "<group>"; };
 		B910A2BE2B697CF8000B9293 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		B910A2C32B6988BE000B9293 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		B910A2CC2B6ABE99000B9293 /* MoviesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 			children = (
 				B910A2AE2B697C26000B9293 /* NetflixCloneApp.swift */,
 				B910A2B02B697C26000B9293 /* ContentView.swift */,
+				B910A2CC2B6ABE99000B9293 /* MoviesList.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -172,6 +175,7 @@
 			files = (
 				B910A2C42B6988BE000B9293 /* ViewModel.swift in Sources */,
 				B910A2BF2B697CF8000B9293 /* NetworkManager.swift in Sources */,
+				B910A2CD2B6ABE99000B9293 /* MoviesList.swift in Sources */,
 				B910A2BD2B697CE7000B9293 /* MovieDetail.swift in Sources */,
 				B910A2B12B697C26000B9293 /* ContentView.swift in Sources */,
 				B910A2AF2B697C26000B9293 /* NetflixCloneApp.swift in Sources */,

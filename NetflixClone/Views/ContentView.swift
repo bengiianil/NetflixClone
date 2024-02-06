@@ -20,9 +20,10 @@ struct ContentView: View {
                     image.resizable()
                         .aspectRatio(contentMode: .fit)
                 } placeholder: {
-                    Circle()
+                    Rectangle()
                         .foregroundStyle(.secondary)
                 }
+                .frame(width: 200, height: 400)
                 
                 HStack {
                     Text("IMDB 7.6")
@@ -39,7 +40,6 @@ struct ContentView: View {
 
                 Text(movie.Title ?? "")
                     .bold()
-                    .font(.title)
                     .padding()
 
                 HStack {
@@ -61,16 +61,20 @@ struct ContentView: View {
                     Spacer()
                 }
                 .padding()
-
             }
+        }
+        .padding()
+        .frame(width: 360, height: 600)
+        .overlay {
+            RoundedRectangle(cornerRadius: 20)
+                .stroke(lineWidth: 2.0)
         }
         .task {
             movie = try? await manager.fetchData(for: MovieDetail.self, from: url)
         }
-        .padding()
     }
 }
 
 #Preview {
-    ContentView(movie: MovieDetail(Title: "", Year: "", Runtime: "", imdbRating: "", Poster: ""))
+    ContentView(movie: MovieDetail(Title: "", Year: "", Runtime: "", imdbRating: "", Poster: "https://m.media-amazon.com/images/M/MV5BNjM0NTc0NzItM2FlYS00YzEwLWE0YmUtNTA2ZWIzODc2OTgxXkEyXkFqcGdeQXVyNTgwNzIyNzg@._V1_SX300.jpg"))
 }

@@ -17,6 +17,7 @@ class NetworkManager {
     
     func fetchData<T: Decodable>(for: T.Type, from urlString: String) async throws -> T {
         guard let url = URL(string: urlString) else {
+            print("invalidUrl")
             throw AppError.invalidUrl
         }
         
@@ -25,6 +26,7 @@ class NetworkManager {
             
             guard let response = response as? HTTPURLResponse,
                   response.statusCode == 200 else {
+                print("invalidResponse")
                 throw AppError.invalidResponse
             }
             
@@ -32,6 +34,7 @@ class NetworkManager {
             return decodedData
             
         } catch {
+            print("invalidData")
             throw AppError.invalidData
         }
     }
