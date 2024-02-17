@@ -9,9 +9,24 @@ import Foundation
 
 enum SliderCode: Int {
     case nowPlaying = 0
-    case popular
-    case topRated
-    case upcoming
+    case popular = 1
+    case topRated = 2
+    case upcoming = 3
+}
+
+extension SliderCode {
+    var title: String {
+        switch self {
+        case .nowPlaying:
+            return "Now Playing"
+        case .popular:
+            return "Popular"
+        case .topRated:
+            return "Top Rated"
+        case .upcoming:
+            return "Upcoming"
+        }
+    }
 }
 
 extension SliderCode {
@@ -22,9 +37,10 @@ extension SliderCode {
         case .popular:
             return "/popular"
         case .topRated:
-            return "/topRated"
+            return "/top_rated"
         case .upcoming:
             return "/upcoming"
         }
     }
 }
+
