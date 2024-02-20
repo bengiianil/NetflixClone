@@ -24,33 +24,9 @@ struct SliderMovieView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
                     ForEach(movieModel.movie?.results ?? [], id: \.id) { item in
-                        VStack {
-                            let url = manager.imageUrl + (item.posterPath)
-                            let imageUrl = URL(string: url)
-                            AsyncImage(url: imageUrl) { image in
-                                image.resizable()
-                                    .aspectRatio(contentMode: .fit)
-                            } placeholder: {
-                                Rectangle()
-                                    .foregroundStyle(.secondary)
-                            }
-                            .frame(width: 120, height: 180)
-                            
-                            HStack {
-                                Spacer()
-                                Image(systemName: "info.circle")
-                                    .foregroundStyle(.white)
-                                Spacer()
-                                Spacer()
-                                Image(systemName: "ellipsis")
-                                    .foregroundStyle(.white)
-                                Spacer()
-                            }
-                            .frame(width: 120)
-                        }
-                        .padding(.bottom, 4)
-                        .background(Color(.darkGray))
-                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        let url = manager.imageUrl + (item.posterPath)
+                        MovieView(url: url)
+                            .padding(.horizontal, 4)
                     }
                 }
             }
@@ -75,5 +51,5 @@ struct SliderMovieView: View {
 
 
 #Preview {
-    SliderMovieView(index: 0)
+    SliderMovieView(index: 1)
 }

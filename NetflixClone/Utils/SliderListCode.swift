@@ -8,7 +8,7 @@
 import Foundation
 
 enum SliderCode: Int {
-    case nowPlaying = 0
+//    case nowPlaying = 0
     case popular = 1
     case topRated = 2
     case upcoming = 3
@@ -17,8 +17,8 @@ enum SliderCode: Int {
 extension SliderCode {
     var title: String {
         switch self {
-        case .nowPlaying:
-            return "Now Playing"
+//        case .nowPlaying:
+//            return "Now Playing"
         case .popular:
             return "Popular"
         case .topRated:
@@ -32,8 +32,8 @@ extension SliderCode {
 extension SliderCode {
     var path: String {
         switch self {
-        case .nowPlaying:
-            return "/now_playing"
+//        case .nowPlaying:
+//            return "/now_playing"
         case .popular:
             return "/popular"
         case .topRated:
