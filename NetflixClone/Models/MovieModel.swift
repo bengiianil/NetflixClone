@@ -31,9 +31,9 @@ struct Dates: Codable {
 struct Results: Codable {
     let id: Int
     let title: String
-    let originalTitle: String
     let overview: String
     let posterPath: String
+    let genreIds: [Int]
 }
 
 //let adult: Bool

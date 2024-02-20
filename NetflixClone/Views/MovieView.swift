@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 struct MovieView: View {
     let path = SliderCode(rawValue: 1)?.path
     let url: String
@@ -23,7 +22,8 @@ struct MovieView: View {
                     .foregroundStyle(.secondary)
             }
             .frame(width: 120, height: 180)
-            
+            .padding(.bottom, 8)
+
             HStack {
                 Spacer()
                 Image(systemName: "info.circle")
@@ -39,8 +39,8 @@ struct MovieView: View {
         .padding(.bottom, 4)
         .background(Color(.darkGray))
         .clipShape(RoundedRectangle(cornerRadius: 12))
+        
     }
-
 }
 
 #Preview {

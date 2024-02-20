@@ -14,18 +14,17 @@ enum AppError: Error {
 }
 
 class NetworkManager {
-    var baseUrl = "https://api.themoviedb.org/3/movie"
+    var baseUrl = "https://api.themoviedb.org/3"
     var imageUrl = "https://image.tmdb.org/t/p/original"
     let headers: [String: String] = [
     "accept": "application/json",
     "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmMTc3NjRhM2MxMGYwOGZhZGZhYjEwNWIzYTE4ZjllOSIsInN1YiI6IjYxNzI5NmRmMGQ1ZDg1MDA5MTVkNGNjYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.qwilNEcOUXEueZjwyQN_JNx_6-kbwrOZXujhawlvbO8"
     ]
 
-                                      
-    func fetchData<T: Decodable>(for: T.Type, from path: String) async throws -> T {
+    func fetchData<T: Decodable>(for: T.Type, from path: String = "") async throws -> T {
         let fullUrl = baseUrl + path
+  
         guard let url = URL(string: fullUrl) else {
-            print("invalidUrl")
             throw AppError.invalidUrl
         }
                 
@@ -33,10 +32,9 @@ class NetworkManager {
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = headers
         let (data, response) = try await URLSession.shared.data(for: request)
-        
+
         guard let response = response as? HTTPURLResponse,
               response.statusCode == 200 else {
-            print("invalidResponse")
             throw AppError.invalidResponse
         }
             
@@ -46,7 +44,6 @@ class NetworkManager {
             let decodedData = try decoder.decode(T.self, from: data)
             return decodedData
         } catch {
-            print("invalidData")
             throw AppError.invalidData
         }
     }
