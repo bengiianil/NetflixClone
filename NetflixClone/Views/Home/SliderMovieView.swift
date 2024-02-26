@@ -8,24 +8,24 @@
 import SwiftUI
 
 struct SliderMovieView: View {
-    @StateObject private var movieModel = MovieModel()
-    @StateObject private var genreModel = GenreModel()
+     var manager = NetworkManager()
     @State var index: Int
-    private let manager = NetworkManager()
+    @ObservedObject var viewModel = MovieViewModel()
 
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
                 let title = SliderCode(rawValue: index)?.title
                 Text(title ?? "")
-                    .font(.headline)
+                    .font(.title2)
+                    .fontWeight(.bold)
                 Spacer()
             }
 
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
-                    ForEach(movieModel.movie?.results ?? [], id: \.id) { item in
-                        if let genres = genreModel.genres {
+                    ForEach(viewModel.movieModel?.results ?? [], id: \.id) { item in
+                        if let genres = viewModel.genreModel {
                             let url = manager.imageUrl + (item.posterPath)
                             NavigationLink(destination: MovieDetailView(item: item, genres: genres)) {
                                 MovieView(url: url)
@@ -38,22 +38,8 @@ struct SliderMovieView: View {
         }
         .onAppear {
             Task {
-                await getMovieData(index: index)
+                await viewModel.getMovieData(index: index)
             }
-        }
-//        .environmentObject(movieModel)
-    }
-
-    private func getMovieData(index: Int) async {
-        do {
-            let path = SliderCode(rawValue: index)?.path
-            let movie = try await manager.fetchData(for: Movie.self, from: path ?? "")
-            let genres = try await manager.fetchData(for: Genres.self, from: "/genre/movie/list")
-            
-            movieModel.movie = movie
-            genreModel.genres = genres
-        } catch {
-            print("An unexpected error occurred: \(error)")
         }
     }
 }

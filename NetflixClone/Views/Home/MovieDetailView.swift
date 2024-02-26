@@ -10,14 +10,14 @@ import SwiftUI
 struct MovieDetailView: View {
     let item: Results
     let genres: Genres
-    private let manager = NetworkManager()
-    @StateObject private var movieDetailModel = MovieModel()
-    @State private var detailModel: MovieDetails? = nil
-
-    var body: some View { 
+    @ObservedObject var manager = NetworkManager.shared
+    @ObservedObject var viewModel = MovieViewModel()
+    @State private var favoriteState = false
+    @State private var favoriteList = []
+    
+    var body: some View {
         ScrollView {
             VStack(spacing: 16) {
-                
                 ZStack {
                     let url = manager.imageUrl + (item.posterPath)
                     let imageUrl = URL(string: url)
@@ -33,64 +33,73 @@ struct MovieDetailView: View {
 
                     LinearGradientView()
                 }
-
                 
                 HStack {
-                    ForEach(getGenresName(), id: \.self) { name in
-                        Image(systemName: "circle.fill")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 4, height: 4)
-                            .foregroundColor(.red)
-                        
-                        Text(name)
-                        .foregroundStyle(.white)
-                        .font(.footnote)
-                        .fontWeight(.semibold)
+                    if let genreNames = viewModel.genreNames {
+                        ForEach(genreNames, id: \.self) { name in
+                            Image(systemName: "circle.fill")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 4, height: 4)
+                                .foregroundColor(.red)
+                            
+                            Text(name)
+                                .foregroundStyle(.white)
+                                .font(.footnote)
+                                .fontWeight(.semibold)
+                        }
                     }
-                    
-//                    Spacer()
                }
                 
                 HStack {
-                    if let detailModel = detailModel {
+                    if let detailModel = viewModel.detailModel {
                         RoundedTextView(text: detailModel.releaseDate.getYear() ?? "")
                         RoundedTextView(text: "\(detailModel.runtime) min")
                         RoundedTextView(text: String(format: "IMDB %.1f", detailModel.voteAverage))
-//                            .background(RoundedRectangle(cornerRadius: 20).fill(Color.yellow))
-
-//                        Spacer()
                     }
                 }
                 .padding()
-
+                
                 Text(item.overview)
                     .padding()
                     .foregroundStyle(.secondary)
+                        
             }
+
         }
         .ignoresSafeArea()
+        .navigationBarBackButtonHidden()
+        .navigationBarItems(leading: CustomBackButton())
+        .navigationBarItems(trailing:
+            HStack {
+                Spacer()
+                Button {
+                    favoriteState.toggle()
+                    if favoriteState {
+                        favoriteList.append(item)
+                    } else {
+                        favoriteList.remove(at: favoriteList.count - 1)
+                    }
+
+                } label: {
+                    let imageName = favoriteState ? "star.fill" : "star"
+                    Image(systemName: imageName)
+                        .foregroundColor(.yellow)
+                        .padding(8)
+                        .background(
+                            Circle()
+                                .foregroundColor(.gray)
+                        )
+                }
+            }
+        )
+        
         .onAppear {
             Task {
-                await getMovieDetails()
+                await viewModel.getMovieDetails(item: item)
+                await viewModel.getGenresName(item: item, genres: genres)
             }
         }
-    }
-    
-    private func getMovieDetails() async {
-        do {
-            let path = "/movie/\(item.id)"
-            detailModel = try await manager.fetchData(for: MovieDetails.self, from: path)
-        } catch {
-            print("An unexpected error occurred: \(error)")
-        }
-    }
-    
-    private func getGenresName() -> [String] {
-        let genreNames = item.genreIds.compactMap { genreId in
-            return genres.genres.first(where: { $0.id == genreId })?.name
-        }
-        return genreNames
     }
 }
 

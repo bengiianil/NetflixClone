@@ -13,7 +13,9 @@ enum AppError: Error {
     case invalidData
 }
 
-class NetworkManager {
+class NetworkManager: ObservableObject {
+    static let shared = NetworkManager() // Singleton instance
+
     var baseUrl = "https://api.themoviedb.org/3"
     var imageUrl = "https://image.tmdb.org/t/p/original"
 
