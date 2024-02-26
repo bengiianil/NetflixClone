@@ -70,6 +70,7 @@ struct MovieDetailView: View {
             }
         }
         .ignoresSafeArea()
+        .navigationBarBackButtonHidden()
         .onAppear {
             Task {
                 await getMovieDetails()

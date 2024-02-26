@@ -18,7 +18,8 @@ struct SliderMovieView: View {
             HStack {
                 let title = SliderCode(rawValue: index)?.title
                 Text(title ?? "")
-                    .font(.headline)
+                    .font(.title2)
+                    .fontWeight(.bold)
                 Spacer()
             }
 
