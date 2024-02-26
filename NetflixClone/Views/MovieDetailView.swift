@@ -25,32 +25,40 @@ struct MovieDetailView: View {
                         image.resizable()
                             .aspectRatio(contentMode: .fill)
                     } placeholder: {
-                        Rectangle()
-                            .foregroundStyle(.secondary)
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle())
                     }
                     .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 2)
                     .clipped()
+
+                    LinearGradientView()
                 }
+
                 
-                 HStack {
-                     ForEach(getGenresName(), id: \.self) { name in
-                         Image(systemName: "circle.fill")
-                             .resizable()
-                             .scaledToFit()
-                             .frame(width: 4, height: 4)
-                             .foregroundColor(.yellow)
-                         
-                         Text(name)
-                             .foregroundStyle(.white)
-                             .font(.caption)
-                     }
-                }
+                HStack {
+                    ForEach(getGenresName(), id: \.self) { name in
+                        Image(systemName: "circle.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 4, height: 4)
+                            .foregroundColor(.red)
+                        
+                        Text(name)
+                        .foregroundStyle(.white)
+                        .font(.footnote)
+                        .fontWeight(.semibold)
+                    }
+                    
+//                    Spacer()
+               }
                 
                 HStack {
                     if let detailModel = detailModel {
                         RoundedTextView(text: detailModel.releaseDate.getYear() ?? "")
                         RoundedTextView(text: "\(detailModel.runtime) min")
                         RoundedTextView(text: String(format: "IMDB %.1f", detailModel.voteAverage))
+//                            .background(RoundedRectangle(cornerRadius: 20).fill(Color.yellow))
+
 //                        Spacer()
                     }
                 }
@@ -59,22 +67,26 @@ struct MovieDetailView: View {
                 Text(item.overview)
                     .padding()
                     .foregroundStyle(.secondary)
-
             }
-
         }
         .ignoresSafeArea()
-        .task {
-            do {
-                let path = "/movie/\(item.id)"
-                detailModel = try await manager.fetchData(for: MovieDetails.self, from: path)
-            } catch {
-                print("An unexpected error occurred: \(error)")
+        .onAppear {
+            Task {
+                await getMovieDetails()
             }
         }
     }
     
-    func getGenresName() -> [String] {
+    private func getMovieDetails() async {
+        do {
+            let path = "/movie/\(item.id)"
+            detailModel = try await manager.fetchData(for: MovieDetails.self, from: path)
+        } catch {
+            print("An unexpected error occurred: \(error)")
+        }
+    }
+    
+    private func getGenresName() -> [String] {
         let genreNames = item.genreIds.compactMap { genreId in
             return genres.genres.first(where: { $0.id == genreId })?.name
         }

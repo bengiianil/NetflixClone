@@ -18,8 +18,8 @@ struct MovieView: View {
                 image.resizable()
                     .aspectRatio(contentMode: .fit)
             } placeholder: {
-                Rectangle()
-                    .foregroundStyle(.secondary)
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle())
             }
             .frame(width: 120, height: 180)
             .padding(.bottom, 8)
