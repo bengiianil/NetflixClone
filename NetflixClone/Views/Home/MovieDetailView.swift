@@ -93,7 +93,6 @@ struct MovieDetailView: View {
                 }
             }
         )
-        
         .onAppear {
             Task {
                 await viewModel.getMovieDetails(item: item)
