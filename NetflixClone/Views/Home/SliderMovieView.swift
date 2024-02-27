@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct SliderMovieView: View {
-     var manager = NetworkManager()
     @State var index: Int
     @ObservedObject var viewModel = MovieViewModel()
 
@@ -36,10 +35,8 @@ struct SliderMovieView: View {
                 }
             }
         }
-        .onAppear {
-            Task {
-                await viewModel.getMovieData(index: index)
-            }
+        .task {
+            await viewModel.getMovieData(index: index)
         }
     }
 }

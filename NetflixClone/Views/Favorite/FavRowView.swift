@@ -10,7 +10,7 @@ import SwiftUI
 struct FavRowView: View {
     let item: Results
     let genres: Genres
-    @ObservedObject var manager = NetworkManager.shared
+    @ObservedObject var viewModel = MovieViewModel()
 
     var body: some View {
         HStack {
@@ -39,13 +39,17 @@ struct FavRowView: View {
                 Text(item.title)
                     .font(.title2)
                     .fontWeight(.bold)
-//                Text(item.genreIds)
-//                    .font(.caption)
+                if let genreNames = viewModel.genreNames {
+                    Text(genreNames.joined(separator: ", "))
+                        .font(.caption)
+                }
             }
             Spacer()
         }
         .padding(.horizontal)
-
+        .task {
+            await viewModel.getGenresName(item: item, genres: genres)
+        }
     }
 }
 
