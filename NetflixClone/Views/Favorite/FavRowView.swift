@@ -14,7 +14,7 @@ struct FavRowView: View {
 
     var body: some View {
         HStack {
-            let url = manager.imageUrl + (item.posterPath)
+            let url = Constants.imageUrl + (item.posterPath)
             let imageUrl = URL(string: url)
             
             AsyncImage(url: imageUrl) { image in

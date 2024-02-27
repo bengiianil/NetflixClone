@@ -10,7 +10,6 @@ import SwiftUI
 struct MovieDetailView: View {
     let item: Results
     let genres: Genres
-    @ObservedObject var manager = NetworkManager.shared
     @ObservedObject var viewModel = MovieViewModel()
     @State private var favoriteState = false
     @State private var favoriteList = []
@@ -19,7 +18,7 @@ struct MovieDetailView: View {
         ScrollView {
             VStack(spacing: 16) {
                 ZStack {
-                    let url = manager.imageUrl + (item.posterPath)
+                    let url = Constants.imageUrl + (item.posterPath)
                     let imageUrl = URL(string: url)
                     AsyncImage(url: imageUrl) { image in
                         image.resizable()

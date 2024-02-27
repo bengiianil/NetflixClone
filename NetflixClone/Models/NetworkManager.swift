@@ -14,18 +14,13 @@ enum AppError: Error {
 }
 
 class NetworkManager: ObservableObject {
-    static let shared = NetworkManager() // Singleton instance
+    static let shared = NetworkManager()
 
-    var baseUrl = "https://api.themoviedb.org/3"
-    var imageUrl = "https://image.tmdb.org/t/p/original"
-
-    let headers: [String: String] = [
-    "accept": "application/json",
-    "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmMTc3NjRhM2MxMGYwOGZhZGZhYjEwNWIzYTE4ZjllOSIsInN1YiI6IjYxNzI5NmRmMGQ1ZDg1MDA5MTVkNGNjYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.qwilNEcOUXEueZjwyQN_JNx_6-kbwrOZXujhawlvbO8"
-    ]
+    let headers: [String: String] = [Constants.accept: Constants.application,
+                                     Constants.auth: Constants.token]
 
     func fetchData<T: Decodable>(for: T.Type, from path: String = "") async throws -> T {
-        let fullUrl = baseUrl + path
+        let fullUrl = Constants.baseUrl + path
   
         guard let url = URL(string: fullUrl) else {
             throw AppError.invalidUrl

@@ -26,7 +26,7 @@ struct SliderMovieView: View {
                 HStack {
                     ForEach(viewModel.movieModel?.results ?? [], id: \.id) { item in
                         if let genres = viewModel.genreModel {
-                            let url = manager.imageUrl + (item.posterPath)
+                            let url = Constants.imageUrl + (item.posterPath)
                             NavigationLink(destination: MovieDetailView(item: item, genres: genres)) {
                                 MovieView(url: url)
                                     .padding(.horizontal, 4)
