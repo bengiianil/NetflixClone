@@ -8,8 +8,8 @@
 import Foundation
 
 enum SliderCode: Int {
-    case popular
     case topRated
+    case popular
     case upcoming
     case nowPlaying
 }

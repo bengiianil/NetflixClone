@@ -9,28 +9,47 @@ import SwiftUI
 
 struct MainMovieView: View {
     @ObservedObject var viewModel = MovieViewModel()
-    let path = SliderCode(rawValue: 3)?.path
+    @State private var currentPage = 0
+    private let path = SliderCode(rawValue: 3)?.path
 
     var body: some View {
         VStack {
-            let url = Constants.imageUrl + (viewModel.movieModel?.results?.first?.posterPath ?? "")
-            let imageUrl = URL(string: url)
-            AsyncImage(url: imageUrl) { image in
-                image.resizable()
-                    .aspectRatio(contentMode: .fill)
-            } placeholder: {
-                ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle())
+            TabView(selection: $currentPage) {
+                ForEach(0..<5) { index in
+                    if let movie = viewModel.movieModel?.results?[index],
+                       let genres = viewModel.genreModel {
+                        
+                        let url = Constants.imageUrl + movie.posterPath
+                        let imageUrl = URL(string: url)
+                        
+                        Button(action: {
+                            // Handle the tap action here if needed
+                            // You can navigate to the detail view or perform any other action
+                        }) {
+                            NavigationLink(destination: MovieDetailView(item: movie, genres: genres)) {
+                                AsyncImage(url: imageUrl) { image in
+                                    image.resizable()
+                                        .tag(index)
+                                } placeholder: {
+                                    ProgressView()
+                                        .progressViewStyle(CircularProgressViewStyle())
+                                }
+                                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 2)
+                            }
+                        }
+                        .buttonStyle(PlainButtonStyle()) // To remove button styling
+                    }
+                }
             }
-            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 2)
-            .clipped()
+            .tabViewStyle(PageTabViewStyle())
+            .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
         }
         .task {
             await viewModel.fetchMovieData(index: 3)
         }
     }
 }
-
+ 
 #Preview {
     MainMovieView()
 }
