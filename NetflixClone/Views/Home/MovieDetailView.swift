@@ -94,7 +94,7 @@ struct MovieDetailView: View {
             }
         )
         .task {
-            await viewModel.getMovieDetails(item: item)
+            await viewModel.fetchMovieDetails(item: item)
             await viewModel.getGenresName(item: item, genres: genres)
         }
     }

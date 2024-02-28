@@ -36,12 +36,11 @@ struct SliderMovieView: View {
             }
         }
         .task {
-            await viewModel.getMovieData(index: index)
+            await viewModel.fetchMovieData(index: index)
         }
     }
 }
 
-
 #Preview {
-    SliderMovieView(index: 1)
+    SliderMovieView(index: 0)
 }

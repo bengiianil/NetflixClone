@@ -21,7 +21,7 @@ struct MovieView: View {
                 ProgressView()
                     .progressViewStyle(CircularProgressViewStyle())
             }
-            .frame(width: 120, height: 180)
+            .frame(width: 112, height: 168)
 //            .padding(.bottom, 8)
 
 //            VStack {

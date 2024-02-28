@@ -10,11 +10,12 @@ import Foundation
 class MovieViewModel: ObservableObject {
     private var manager = NetworkManager()
     @Published var movieModel: Movie?
+    @Published var filteredMovieModel: Movie?
     @Published var genreModel: Genres?
     @Published var detailModel: MovieDetails?
     @Published var genreNames: [String]?
 
-    func getMovieData(index: Int) async {
+    func fetchMovieData(index: Int) async {
         do {
             let path = SliderCode(rawValue: index)?.path
             let movie = try await manager.fetchData(for: Movie.self, from: path ?? "")
@@ -29,7 +30,22 @@ class MovieViewModel: ObservableObject {
         }
     }
     
-    func getMovieDetails(item: Results) async {
+    func fetchMoviesByTitle(text: String) async {
+        do {
+            let path = "/search/movie?query=\(text)"
+            let movie = try await manager.fetchData(for: Movie.self, from: path)
+            let genres = try await manager.fetchData(for: Genres.self, from: "/genre/movie/list")
+
+            DispatchQueue.main.async {
+                self.filteredMovieModel = movie
+                self.genreModel = genres
+            }
+        } catch {
+            print("An unexpected error occurred: \(error)")
+        }
+    }
+    
+    func fetchMovieDetails(item: Results) async {
         do {
             let path = "/movie/\(item.id)"
             let detailModel = try await manager.fetchData(for: MovieDetails.self, from: path)

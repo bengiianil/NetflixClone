@@ -9,11 +9,12 @@ import SwiftUI
 
 struct FavoriteView: View {
     @EnvironmentObject private var favorites: FavoriteViewModel
+    @State private var searchText = ""
 
     var body: some View {
         NavigationView {
             VStack {
-                List(favorites.favMovies) { favorite in
+                List(filteredFavMovies) { favorite in
                     NavigationLink {
                         // MovieDetailView(item: favorite, genres: genres)
                     } label: {
@@ -22,6 +23,15 @@ struct FavoriteView: View {
                 }
             }
             .navigationTitle("Favorites")
+            .searchable(text: $searchText, prompt: "Search for movie")
+        }
+    }
+    
+    var filteredFavMovies: [Results] {
+        if !searchText.isEmpty {
+            return favorites.favMovies.filter { $0.title.localizedCaseInsensitiveContains(searchText) }
+        } else {
+            return favorites.favMovies
         }
     }
 }
