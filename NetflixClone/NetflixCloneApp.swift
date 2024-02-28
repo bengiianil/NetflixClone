@@ -10,11 +10,13 @@ import SwiftUI
 @main
 struct NetflixCloneApp: App {
     @Environment(\.colorScheme) var colorScheme
+    @StateObject private var favorites = FavoriteViewModel()
 
     var body: some Scene {
         WindowGroup {
             TabBarView()
                 .preferredColorScheme(.dark)
+                .environmentObject(favorites)
         }
     }
 }

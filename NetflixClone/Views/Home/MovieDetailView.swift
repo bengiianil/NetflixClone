@@ -12,8 +12,8 @@ struct MovieDetailView: View {
     let genres: Genres
     @ObservedObject var viewModel = MovieViewModel()
     @State private var favoriteState = false
-    @State private var favoriteList = []
-    
+    @EnvironmentObject private var favorites: FavoriteViewModel
+
     var body: some View {
         ScrollView {
             VStack(spacing: 16) {
@@ -74,10 +74,10 @@ struct MovieDetailView: View {
                 Spacer()
                 Button {
                     favoriteState.toggle()
-                    if favoriteState {
-                        favoriteList.append(item)
+                    if favorites.contains(movie: item) {
+                        favorites.remove(movie: item)
                     } else {
-                        favoriteList.remove(at: favoriteList.count - 1)
+                        favorites.add(movie: item)
                     }
 
                 } label: {

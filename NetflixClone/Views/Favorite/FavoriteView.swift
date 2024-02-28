@@ -8,8 +8,18 @@
 import SwiftUI
 
 struct FavoriteView: View {
+    @EnvironmentObject private var favorites: FavoriteViewModel
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            List(favorites.favMovies) { favorite in
+                NavigationLink {
+                    
+                } label: {
+                    FavRowView(item: favorite, rating: .constant(3.8))
+                }
+            }
+        }
     }
 }
 

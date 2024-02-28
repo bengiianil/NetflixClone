@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct MovieView: View {
-    let path = SliderCode(rawValue: 1)?.path
+    let path = SliderCode(rawValue: 0)?.path
     let url: String
-    @EnvironmentObject var movieModel: MovieModel
 
     var body: some View {
         ZStack {
@@ -25,27 +24,27 @@ struct MovieView: View {
             .frame(width: 120, height: 180)
 //            .padding(.bottom, 8)
 
-            VStack {
-                HStack {
-                    Spacer()
-                    Button {
-
-                    } label: {
-                        Image(systemName: "star")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 24, height: 24)
-                            .foregroundColor(.yellow)
-                            .padding(4)
-                    }
-                    .background(
-                        Circle()
-                            .foregroundColor(.gray)
-                    )
-                }
-                Spacer()
-            }
-            .frame(width: 120, height: 180)
+//            VStack {
+//                HStack {
+//                    Spacer()
+//                    Button {
+//
+//                    } label: {
+//                        Image(systemName: "star")
+//                            .resizable()
+//                            .scaledToFit()
+//                            .frame(width: 24, height: 24)
+//                            .foregroundColor(.yellow)
+//                            .padding(4)
+//                    }
+//                    .background(
+//                        Circle()
+//                            .foregroundColor(.gray)
+//                    )
+//                }
+//                Spacer()
+//            }
+//            .frame(width: 120, height: 180)
 
             
 //            HStack {

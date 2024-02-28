@@ -28,12 +28,16 @@ struct Dates: Codable {
     let minimum: String?
 }
 
-struct Results: Codable {
+struct Results: Codable, Identifiable, Hashable {
     let id: Int
     let title: String
     let overview: String
     let posterPath: String
     let genreIds: [Int]
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
 }
 
 struct MovieDetails: Codable {
