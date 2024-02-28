@@ -23,7 +23,7 @@ struct SliderMovieView: View {
 
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
-                    ForEach(viewModel.movieModel?.results ?? [], id: \.id) { item in
+                    ForEach(viewModel.movieModel?.results?.reversed() ?? [], id: \.id) { item in
                         if let genres = viewModel.genreModel {
                             let url = Constants.imageUrl + (item.posterPath)
                             NavigationLink(destination: MovieDetailView(item: item, genres: genres)) {
