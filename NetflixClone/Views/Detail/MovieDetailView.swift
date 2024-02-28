@@ -11,7 +11,6 @@ struct MovieDetailView: View {
     let item: Results
     let genres: Genres
     @ObservedObject var viewModel = MovieViewModel()
-    @EnvironmentObject private var favorites: FavoriteViewModel
 
     var body: some View {
         ScrollView {
@@ -77,31 +76,7 @@ struct MovieDetailView: View {
         .ignoresSafeArea()
         .navigationBarBackButtonHidden()
         .navigationBarItems(leading: CustomBackButton())
-        .navigationBarItems(trailing:
-            HStack {
-                var favoriteState = favorites.contains(movie: item)
-
-                Spacer()
-                Button {
-                    favoriteState.toggle()
-                    if favorites.contains(movie: item) {
-                        favorites.remove(movie: item)
-                    } else {
-                        favorites.add(movie: item)
-                    }
-
-                } label: {
-                    let imageName = favoriteState ? "star.fill" : "star"
-                    Image(systemName: imageName)
-                        .foregroundColor(.yellow)
-                        .padding(8)
-                        .background(
-                            Circle()
-                                .foregroundColor(.gray)
-                        )
-                }
-            }
-        )
+        .navigationBarItems(trailing: CustomStarView(item: item))
         .task {
             await viewModel.fetchMovieDetails(item: item)
             await viewModel.getGenresName(item: item, genres: genres)
