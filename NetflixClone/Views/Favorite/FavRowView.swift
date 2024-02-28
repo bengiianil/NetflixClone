@@ -9,7 +9,6 @@ import SwiftUI
 
 struct FavRowView: View {
     let item: Results
-//    let genres: Genres
     @ObservedObject var viewModel = MovieViewModel()
     
     private let maxRating = 5
@@ -29,7 +28,7 @@ struct FavRowView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 5))
                     .overlay {
                         RoundedRectangle(cornerRadius: 5)
-                            .stroke(.gray, lineWidth: 1)
+                            .stroke(.white, lineWidth: 2)
                         
                     }
                 
@@ -63,10 +62,6 @@ struct FavRowView: View {
 //                }
             }
             Spacer()
-        }
-        .padding(.horizontal)
-        .task {
-//            await viewModel.getGenresName(item: item, genres: genres)
         }
     }
 //    private func fillStar(at index: Int) -> CGFloat {

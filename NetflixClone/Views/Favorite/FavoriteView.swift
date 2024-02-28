@@ -11,14 +11,17 @@ struct FavoriteView: View {
     @EnvironmentObject private var favorites: FavoriteViewModel
 
     var body: some View {
-        NavigationStack {
-            List(favorites.favMovies) { favorite in
-                NavigationLink {
-                    
-                } label: {
-                    FavRowView(item: favorite, rating: .constant(3.8))
+        NavigationView {
+            VStack {
+                List(favorites.favMovies) { favorite in
+                    NavigationLink {
+                        // MovieDetailView(item: favorite, genres: genres)
+                    } label: {
+                        FavRowView(item: favorite, rating: .constant(3.8))
+                    }
                 }
             }
+            .navigationTitle("Favorites")
         }
     }
 }

@@ -11,7 +11,6 @@ struct MovieDetailView: View {
     let item: Results
     let genres: Genres
     @ObservedObject var viewModel = MovieViewModel()
-    @State private var favoriteState = false
     @EnvironmentObject private var favorites: FavoriteViewModel
 
     var body: some View {
@@ -71,6 +70,8 @@ struct MovieDetailView: View {
         .navigationBarItems(leading: CustomBackButton())
         .navigationBarItems(trailing:
             HStack {
+                var favoriteState = favorites.contains(movie: item)
+
                 Spacer()
                 Button {
                     favoriteState.toggle()
@@ -92,11 +93,9 @@ struct MovieDetailView: View {
                 }
             }
         )
-        .onAppear {
-            Task {
-                await viewModel.getMovieDetails(item: item)
-                await viewModel.getGenresName(item: item, genres: genres)
-            }
+        .task {
+            await viewModel.getMovieDetails(item: item)
+            await viewModel.getGenresName(item: item, genres: genres)
         }
     }
 }
