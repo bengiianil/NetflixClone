@@ -23,6 +23,7 @@
 		B95679FD2B8E6FC500258628 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95679FC2B8E6FC500258628 /* Constants.swift */; };
 		B95679FF2B8F4FBE00258628 /* FavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95679FE2B8F4FBE00258628 /* FavoriteViewModel.swift */; };
 		B9567A012B8F819D00258628 /* FilteredMovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9567A002B8F819D00258628 /* FilteredMovieView.swift */; };
+		B9567A032B8F8D7B00258628 /* MainMovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9567A022B8F8D7B00258628 /* MainMovieView.swift */; };
 		B96C51C22B7E90CB00602408 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96C51C12B7E90CB00602408 /* HomeView.swift */; };
 		B96C51C42B7E90DD00602408 /* MovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96C51C32B7E90DD00602408 /* MovieView.swift */; };
 		B96C51C62B7FC15600602408 /* SliderMovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96C51C52B7FC15600602408 /* SliderMovieView.swift */; };
@@ -49,6 +50,7 @@
 		B95679FC2B8E6FC500258628 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B95679FE2B8F4FBE00258628 /* FavoriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewModel.swift; sourceTree = "<group>"; };
 		B9567A002B8F819D00258628 /* FilteredMovieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredMovieView.swift; sourceTree = "<group>"; };
+		B9567A022B8F8D7B00258628 /* MainMovieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMovieView.swift; sourceTree = "<group>"; };
 		B96C51C12B7E90CB00602408 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		B96C51C32B7E90DD00602408 /* MovieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieView.swift; sourceTree = "<group>"; };
 		B96C51C52B7FC15600602408 /* SliderMovieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderMovieView.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 			children = (
 				B95679EF2B8D163500258628 /* Home */,
 				B95679F12B8D166000258628 /* Favorite */,
+				B9567A042B8F8D8D00258628 /* Detail */,
 				B95679F02B8D164B00258628 /* Base */,
 			);
 			path = Views;
@@ -139,10 +142,10 @@
 			isa = PBXGroup;
 			children = (
 				B96C51C12B7E90CB00602408 /* HomeView.swift */,
+				B9567A022B8F8D7B00258628 /* MainMovieView.swift */,
 				B96C51C52B7FC15600602408 /* SliderMovieView.swift */,
 				B9567A002B8F819D00258628 /* FilteredMovieView.swift */,
 				B96C51C32B7E90DD00602408 /* MovieView.swift */,
-				B97BA3182B85007E00ACC285 /* MovieDetailView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -150,9 +153,9 @@
 		B95679F02B8D164B00258628 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				B95679ED2B8D159100258628 /* TabBarView.swift */,
 				B95679E92B8D01B600258628 /* RoundedTextView.swift */,
 				B95679EB2B8D0E4600258628 /* LinearGradientView.swift */,
-				B95679ED2B8D159100258628 /* TabBarView.swift */,
 				B95679F52B8E501600258628 /* CustomBackButton.swift */,
 			);
 			path = Base;
@@ -174,6 +177,14 @@
 				B95679FE2B8F4FBE00258628 /* FavoriteViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		B9567A042B8F8D8D00258628 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				B97BA3182B85007E00ACC285 /* MovieDetailView.swift */,
+			);
+			path = Detail;
 			sourceTree = "<group>";
 		};
 		B96C51C72B7FC45900602408 /* Utils */ = {
@@ -267,6 +278,7 @@
 				B95679FF2B8F4FBE00258628 /* FavoriteViewModel.swift in Sources */,
 				B910A2BF2B697CF8000B9293 /* NetworkManager.swift in Sources */,
 				B97BA3192B85007E00ACC285 /* MovieDetailView.swift in Sources */,
+				B9567A032B8F8D7B00258628 /* MainMovieView.swift in Sources */,
 				B910A2BD2B697CE7000B9293 /* MovieModel.swift in Sources */,
 				B95679EC2B8D0E4600258628 /* LinearGradientView.swift in Sources */,
 				B95679F82B8E512100258628 /* FavRowView.swift in Sources */,

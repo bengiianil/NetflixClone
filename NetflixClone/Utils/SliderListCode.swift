@@ -11,6 +11,7 @@ enum SliderCode: Int {
     case popular
     case topRated
     case upcoming
+    case nowPlaying
 }
 
 extension SliderCode {
@@ -22,6 +23,8 @@ extension SliderCode {
             return "Top Rated"
         case .upcoming:
             return "Upcoming"
+        case .nowPlaying:
+            return "Now Playing"
         }
     }
 }
@@ -35,6 +38,8 @@ extension SliderCode {
             return "/movie/top_rated"
         case .upcoming:
             return "/movie/upcoming"
+        case .nowPlaying:
+            return "/movie/now_playing"
         }
     }
 }

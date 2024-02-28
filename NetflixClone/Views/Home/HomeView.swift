@@ -19,10 +19,10 @@ struct HomeView: View {
         NavigationView {
             ScrollView {
                 if searchText.isEmpty {
-                    VStack(spacing: 32) {
-                        SliderMovieView(index: 0)
-                        SliderMovieView(index: 1)
-                        SliderMovieView(index: 2)
+                    LazyVGrid(columns: Array(repeating: GridItem(), count: 1), spacing: 32) {
+                        ForEach(0..<3) { index in
+                            SliderMovieView(index: index)
+                        }
                     }
                 } else if searchText.count < 3 {
                     Spacer()
