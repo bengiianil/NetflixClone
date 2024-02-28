@@ -58,12 +58,21 @@ struct MovieDetailView: View {
                 }
                 .padding()
                 
-                Text(item.overview)
-                    .padding()
-                    .foregroundStyle(.secondary)
-                        
+                VStack {
+                    HStack {
+                        Text(item.title)
+                            .padding(.horizontal)
+                            .foregroundStyle(.white)
+                            .font(.title2)
+                            .fontWeight(.bold)
+                        Spacer()
+                    }
+                    Spacer(minLength: 2)
+                    Text(item.overview)
+                        .padding()
+                        .foregroundStyle(.secondary)
+                }
             }
-
         }
         .ignoresSafeArea()
         .navigationBarBackButtonHidden()

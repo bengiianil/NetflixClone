@@ -22,22 +22,17 @@ struct MainMovieView: View {
                         let url = Constants.imageUrl + movie.posterPath
                         let imageUrl = URL(string: url)
                         
-                        Button(action: {
-                            // Handle the tap action here if needed
-                            // You can navigate to the detail view or perform any other action
-                        }) {
-                            NavigationLink(destination: MovieDetailView(item: movie, genres: genres)) {
-                                AsyncImage(url: imageUrl) { image in
-                                    image.resizable()
-                                        .tag(index)
-                                } placeholder: {
-                                    ProgressView()
-                                        .progressViewStyle(CircularProgressViewStyle())
-                                }
-                                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 2)
+                        NavigationLink(destination: MovieDetailView(item: movie, genres: genres)) {
+                            AsyncImage(url: imageUrl) { image in
+                                image.resizable()
+                                    .tag(index)
+                            } placeholder: {
+                                ProgressView()
+                                    .progressViewStyle(CircularProgressViewStyle())
                             }
+                            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 2)
                         }
-                        .buttonStyle(PlainButtonStyle()) // To remove button styling
+                        .buttonStyle(PlainButtonStyle())
                     }
                 }
             }

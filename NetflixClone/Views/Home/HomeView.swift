@@ -23,7 +23,7 @@ struct HomeView: View {
                     VStack() {
                         MainMovieView()
                             .frame(width: UIScreen.main.bounds.width, height:  UIScreen.main.bounds.height / 2)
-                        Spacer()
+                        Spacer(minLength: 32)
                         LazyVGrid(columns: Array(repeating: GridItem(), count: 1), spacing: 32) {
                             ForEach(0..<3) { index in
                                 SliderMovieView(index: index)
