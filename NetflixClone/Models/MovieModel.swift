@@ -28,13 +28,17 @@ struct Dates: Codable {
     let minimum: String?
 }
 
-struct Results: Codable, Identifiable, Hashable {
+struct Results: Codable, Equatable, Identifiable, Hashable {
     let id: Int
     let title: String
     let overview: String
     let posterPath: String
     let genreIds: [Int]
 
+    static func == (lhs: Results, rhs: Results) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }

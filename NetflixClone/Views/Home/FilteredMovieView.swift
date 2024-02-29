@@ -12,13 +12,15 @@ struct FilteredMovieView: View {
     @Binding var searchText: String
     
     var body: some View {
-        LazyVGrid(columns: Array(repeating: GridItem(), count: 3), spacing: 16) {
-            ForEach(filteredMovies, id: \.id) { item in
-                if let genres = viewModel.genreModel {
-                    let url = Constants.imageUrl + (item.posterPath)
-                    NavigationLink(destination: MovieDetailView(item: item, genres: genres)) {
-                        MovieView(url: url)
-                            .padding(.horizontal, 16)
+        VStack {
+            LazyVGrid(columns: Array(repeating: GridItem(), count: 3), spacing: 16) {
+                ForEach(filteredMovies, id: \.id) { item in
+                    if let genres = viewModel.genreModel {
+                        let url = Constants.imageUrl + (item.posterPath)
+                        NavigationLink(destination: MovieDetailView(item: item, genres: genres)) {
+                            MovieView(url: url)
+                                .padding(.horizontal, 16)
+                        }
                     }
                 }
             }

@@ -31,16 +31,16 @@ struct HomeView: View {
                         }
                     }
                     .padding(.vertical)
-                } else if searchText.count < 3 {
-                    VStack(spacing: 32) {
-                        Spacer(minLength: 100)
-                        Spacer()
-                        Text("Please enter min 3 letter for search")
-                            .font(.title2)
-                        Image(systemName: "exclamationmark.magnifyingglass")
-                            .resizable()
-                            .frame(width: 64, height: 64)
-                    }
+//                } else if searchText.count < 3 {
+//                    VStack(spacing: 32) {
+//                        Spacer(minLength: 100)
+//                        Spacer()
+//                        Text("Please enter min 3 letter for search")
+//                            .font(.title2)
+//                        Image(systemName: "exclamationmark.magnifyingglass")
+//                            .resizable()
+//                            .frame(width: 64, height: 64)
+//                    }
                 } else {
                     FilteredMovieView(searchText: $searchText)
                 }
