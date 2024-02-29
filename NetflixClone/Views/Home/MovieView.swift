@@ -13,16 +13,24 @@ struct MovieView: View {
 
     var body: some View {
         ZStack {
-            let imageUrl = URL(string: url)
-            AsyncImage(url: imageUrl) { image in
-                image.resizable()
-                    .aspectRatio(contentMode: .fit)
-            } placeholder: {
-                ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle())
+            if let imageUrl = URL(string: url) {
+                CacheAsyncImage(url: imageUrl) { phase in
+                    switch phase {
+                    case .success(let image):
+                        image.resizable()
+                            .aspectRatio(contentMode: .fit)
+                    case .failure:
+                        EmptyView()
+                    case .empty:
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle())
+                    @unknown default:
+                        Image(systemName: "questionmark")
+                    }
+                }
+                .frame(width: 112, height: 168)
+                //  .padding(.bottom, 8)
             }
-            .frame(width: 112, height: 168)
-//            .padding(.bottom, 8)
 
 //            VStack {
 //                HStack {

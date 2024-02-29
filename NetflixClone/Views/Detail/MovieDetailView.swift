@@ -17,18 +17,26 @@ struct MovieDetailView: View {
             VStack(spacing: 16) {
                 ZStack {
                     let url = Constants.imageUrl + (item.posterPath)
-                    let imageUrl = URL(string: url)
-                    AsyncImage(url: imageUrl) { image in
-                        image.resizable()
-                            .aspectRatio(contentMode: .fill)
-                    } placeholder: {
-                        ProgressView()
-                            .progressViewStyle(CircularProgressViewStyle())
-                    }
-                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 2)
-                    .clipped()
+                    if let imageUrl = URL(string: url) {
+                        CacheAsyncImage(url: imageUrl) { phase in
+                            switch phase {
+                            case .success(let image):
+                                image.resizable()
+                                    .aspectRatio(contentMode: .fill)
+                            case .failure:
+                                EmptyView()
+                            case .empty:
+                                ProgressView()
+                                    .progressViewStyle(CircularProgressViewStyle())
+                            @unknown default:
+                                Image(systemName: "questionmark")
+                            }
+                        }
+                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 2)
+                        .clipped()
 
-                    LinearGradientView()
+                        LinearGradientView()
+                    }
                 }
                 
                 HStack {

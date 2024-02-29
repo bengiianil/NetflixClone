@@ -20,19 +20,28 @@ struct MainMovieView: View {
                        let genres = viewModel.genreModel {
                         
                         let url = Constants.imageUrl + movie.posterPath
-                        let imageUrl = URL(string: url)
-                        
-                        NavigationLink(destination: MovieDetailView(item: movie, genres: genres)) {
-                            AsyncImage(url: imageUrl) { image in
-                                image.resizable()
-                                    .tag(index)
-                            } placeholder: {
-                                ProgressView()
-                                    .progressViewStyle(CircularProgressViewStyle())
+                        if let imageUrl = URL(string: url) {
+                            
+                            NavigationLink(destination: MovieDetailView(item: movie, genres: genres)) {
+                                CacheAsyncImage(url: imageUrl) { phase in
+                                    switch phase {
+                                    case .success(let image):
+                                        image.resizable()
+                                            .tag(index)
+                                    case .failure:
+                                        EmptyView()
+                                    case .empty:
+                                        ProgressView()
+                                            .progressViewStyle(CircularProgressViewStyle())
+                                    @unknown default:
+                                        Image(systemName: "questionmark")
+                                    }
+                                }
+                                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 2)
                             }
-                            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 2)
+                            .buttonStyle(PlainButtonStyle())
                         }
-                        .buttonStyle(PlainButtonStyle())
+      
                     }
                 }
             }

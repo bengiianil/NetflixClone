@@ -14,26 +14,32 @@ struct FavRowView: View {
     var body: some View {
         HStack {
             let url = Constants.imageUrl + (item.posterPath)
-            let imageUrl = URL(string: url)
-            
-            AsyncImage(url: imageUrl) { image in
-                image.resizable()
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 64, height: 64)
-                    .clipShape(RoundedRectangle(cornerRadius: 5))
-                    .overlay {
-                        RoundedRectangle(cornerRadius: 5)
-                            .stroke(.white, lineWidth: 2)
-                        
+            if let imageUrl = URL(string: url) {
+                CacheAsyncImage(url: imageUrl) { phase in
+                    switch phase {
+                    case .success(let image):
+                        image.resizable()
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 64, height: 64)
+                            .clipShape(RoundedRectangle(cornerRadius: 5))
+                            .overlay {
+                                RoundedRectangle(cornerRadius: 5)
+                                    .stroke(.white, lineWidth: 2)
+                                
+                            }
+                    case .failure:
+                        EmptyView()
+                    case .empty:
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle())
+                    @unknown default:
+                        Image(systemName: "questionmark")
                     }
-                
-            } placeholder: {
-                ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle())
+                }
+                .padding(.trailing, 24)
             }
-            .padding(.trailing, 24)
-
+            
             VStack(spacing: 8) {
                 Text(item.title)
                     .font(.headline)
