@@ -21,6 +21,7 @@ struct FavoriteView: View {
                         FavRowView(item: favorite, searchText: searchText)
                     }
                 }
+                .listRowSeparator(.visible)
             }
             .navigationTitle("Favorites")
             .searchable(text: $searchText, prompt: "Search for movie")

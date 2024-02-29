@@ -96,10 +96,11 @@
 			isa = PBXGroup;
 			children = (
 				B910A2AE2B697C26000B9293 /* NetflixCloneApp.swift */,
-				B9567A0C2B90BC8B00258628 /* Cache */,
-				B95679FB2B8E654400258628 /* ViewModel */,
+				B9567A0C2B90BC8B00258628 /* Caches */,
 				B910A2C02B698075000B9293 /* Views */,
+				B95679FB2B8E654400258628 /* ViewModels */,
 				B910A2C12B698083000B9293 /* Models */,
+				B9567A0F2B90D28000258628 /* Managers */,
 				B96C51C72B7FC45900602408 /* Utils */,
 				B910A2C22B698095000B9293 /* Resources */,
 				B910A2B42B697C26000B9293 /* Preview Content */,
@@ -132,7 +133,6 @@
 			children = (
 				B910A2BC2B697CE7000B9293 /* MovieModel.swift */,
 				B97BA31A2B8533EC00ACC285 /* GenreModel.swift */,
-				B910A2BE2B697CF8000B9293 /* NetworkManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -179,13 +179,13 @@
 			path = Favorite;
 			sourceTree = "<group>";
 		};
-		B95679FB2B8E654400258628 /* ViewModel */ = {
+		B95679FB2B8E654400258628 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
 				B95679F92B8E57C600258628 /* MovieViewModel.swift */,
 				B95679FE2B8F4FBE00258628 /* FavoriteViewModel.swift */,
 			);
-			path = ViewModel;
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		B9567A042B8F8D8D00258628 /* Detail */ = {
@@ -196,12 +196,20 @@
 			path = Detail;
 			sourceTree = "<group>";
 		};
-		B9567A0C2B90BC8B00258628 /* Cache */ = {
+		B9567A0C2B90BC8B00258628 /* Caches */ = {
 			isa = PBXGroup;
 			children = (
 				B9567A0D2B90BCAD00258628 /* CacheAsyncImage.swift */,
 			);
-			path = Cache;
+			path = Caches;
+			sourceTree = "<group>";
+		};
+		B9567A0F2B90D28000258628 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				B910A2BE2B697CF8000B9293 /* NetworkManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		B96C51C72B7FC45900602408 /* Utils */ = {
