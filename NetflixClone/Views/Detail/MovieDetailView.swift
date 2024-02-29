@@ -81,7 +81,7 @@ struct MovieDetailView: View {
                 }
             }
         }
-        .ignoresSafeArea()
+        .ignoresSafeArea(edges: .top)
         .navigationBarBackButtonHidden()
         .navigationBarItems(leading: CustomBackButton())
         .navigationBarItems(trailing: CustomStarView(item: item))

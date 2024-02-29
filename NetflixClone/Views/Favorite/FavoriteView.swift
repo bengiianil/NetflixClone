@@ -10,15 +10,18 @@ import SwiftUI
 struct FavoriteView: View {
     @EnvironmentObject private var favorites: FavoriteViewModel
     @State private var searchText = ""
+    @ObservedObject var viewModel = MovieViewModel()
 
     var body: some View {
         NavigationView {
             VStack {
                 List(filteredFavMovies) { favorite in
                     NavigationLink {
-                        // MovieDetailView(item: favorite, genres: genres)
+                        if let genreModel = viewModel.genreModel {
+                            MovieDetailView(item: favorite, genres: genreModel)
+                        }
                     } label: {
-                        FavRowView(item: favorite, searchText: searchText)
+                        FavRowView(item: favorite, searchText: searchText, viewModel: viewModel)
                     }
                 }
                 .listRowSeparator(.visible)
