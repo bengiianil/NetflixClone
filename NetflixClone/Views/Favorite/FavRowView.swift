@@ -44,9 +44,14 @@ struct FavRowView: View {
                 Text(item.title)
                     .font(.headline)
                     .fontWeight(.bold)
-                                
-                if let voteAverage = viewModel.detailModel?.voteAverage {
-                    RatingView(rating: voteAverage / 2)
+                    
+                HStack {
+                    if let voteAverage = viewModel.detailModel?.voteAverage {
+                        RatingView(rating: voteAverage / 2)
+                        let rating = String(format: "%.1f", voteAverage / 2)
+                        Text("(\(rating)/5)")
+                            .bold()
+                    }
                 }
             }
             
