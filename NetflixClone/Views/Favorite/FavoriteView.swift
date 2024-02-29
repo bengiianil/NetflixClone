@@ -18,7 +18,7 @@ struct FavoriteView: View {
                     NavigationLink {
                         // MovieDetailView(item: favorite, genres: genres)
                     } label: {
-                        FavRowView(item: favorite)
+                        FavRowView(item: favorite, searchText: searchText)
                     }
                 }
             }

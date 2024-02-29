@@ -9,6 +9,7 @@ import SwiftUI
 
 struct FavRowView: View {
     let item: Results
+    let searchText: String
     @ObservedObject var viewModel = MovieViewModel()
 
     var body: some View {
@@ -50,12 +51,18 @@ struct FavRowView: View {
                         RatingView(rating: voteAverage / 2)
                         let rating = String(format: "%.1f", voteAverage / 2)
                         Text("(\(rating)/5)")
+                            .font(.headline)
                             .bold()
                     }
                 }
             }
             
             Spacer()
+        }
+        .onChange(of: searchText) {
+            Task {
+                await viewModel.fetchMovieDetails(item: item)
+            }
         }
         .task {
             await viewModel.fetchMovieDetails(item: item)
@@ -68,5 +75,5 @@ struct FavRowView: View {
                              title: "Wonka",
                              overview: "Willy Wonka – chock-full of ideas and determined to change the world one delectable bite at a time – is proof that the best things in life begin with a dream, and if you’re lucky enough to meet Willy Wonka, anything is possible.",
                              posterPath: "/qhb1qOilapbapxWQn9jtRCMwXJF.jpg",
-                             genreIds: [35, 10751, 14]))
+                             genreIds: [35, 10751, 14]), searchText: "")
 }
