@@ -35,6 +35,7 @@ struct SliderMovieView: View {
                 }
             }
         }
+        .padding()
         .task {
             await viewModel.fetchMovieData(index: index)
         }

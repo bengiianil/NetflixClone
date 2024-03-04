@@ -15,10 +15,17 @@ struct TabBarView: View {
                     Image(systemName: "house.fill")
                     Text("Home")
                 }
+            
             FavoriteView()
                 .tabItem {
                     Image(systemName: "star")
                     Text("Favorite")
+                }
+            
+            ProfileView()
+                .tabItem {
+                    Image(systemName: "person")
+                    Text("Profile")
                 }
         }
         .accentColor(Color.white)

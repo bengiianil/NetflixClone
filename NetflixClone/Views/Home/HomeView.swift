@@ -47,7 +47,7 @@ struct HomeView: View {
 
             }
             .padding()
-            .navigationTitle("NETFLIX")
+            .navigationTitle("MovieLABS")
             .searchable(text: $searchText, prompt: "Search for movie")
         }
     }
