@@ -15,7 +15,7 @@ struct RegisterView: View {
     @State var passwordAgain: String = ""
     @State var showAlert: Bool = false
     @State private var isLoading = false
-    @State private var errorDesc = LoginErrors.invalidData.rawValue
+    @State private var description = LoginAlert.invalidData.rawValue
 
     var body: some View {
         VStack(spacing: 24) {
@@ -49,20 +49,20 @@ struct RegisterView: View {
                 isLoading = true
 
                 if password == passwordAgain {
-                    loginViewModel.register(name: name, email: email, password: password) { isSuccess, errorDesc in
-                        if isSuccess {
+                    loginViewModel.register(name: name, email: email, password: password) { isSuccessful, description in
+                        if isSuccessful {
                             UserDefaults.standard.set(name, forKey: "username")
                             NavigationLink("") {
                                 HomeView()
                             }
                         } else {
                             isLoading = false
-                            self.errorDesc = errorDesc
+                            self.description = description
                             showAlert.toggle()
                         }
                     }
                 } else {
-                    self.errorDesc = LoginErrors.notMatchPassword.rawValue
+                    self.description = LoginAlert.notMatchPassword.rawValue
                     showAlert.toggle()
                 }
 
@@ -88,7 +88,7 @@ struct RegisterView: View {
             .alert(isPresented: $showAlert) {
                 Alert(
                     title: Text("Error"),
-                    message: Text(errorDesc)
+                    message: Text(description)
                 )
             }
         }

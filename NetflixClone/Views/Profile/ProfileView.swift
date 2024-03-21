@@ -29,7 +29,7 @@ struct ProfileView: View {
             .padding()
             
             NavigationLink(
-                 destination: LoginView(email: "", password: ""),
+                 destination: LoginView(),
                  isActive: $shouldNavigateToLogin
              ) {
                  EmptyView()

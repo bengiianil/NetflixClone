@@ -8,21 +8,15 @@
 import FirebaseAuth
 import SwiftUI
 
-enum LoginErrors: String {
-    case invalidData = "You have entered invalid data"
-    case notMatchPassword = "The passwords you entered do not match"
-    case customCase = ""
-}
-
 struct LoginView: View {
     @EnvironmentObject private var loginViewModel: LoginViewModel
-    @State var email: String
-    @State var password: String
+    @State var email: String = ""
+    @State var password: String = ""
     @State var isLoggedIn: Bool = false
     @State private var isLoading = false
     @State private var isRegisterTapped = false
     @State var showAlert: Bool = false
-    @State private var errorDesc = LoginErrors.invalidData.rawValue
+    @State private var description = LoginAlert.invalidData.rawValue
     
     var body: some View {
         if isLoggedIn {
@@ -45,23 +39,57 @@ struct LoginView: View {
                     }
                     .padding()
            
-                    TextField("E-mail", text: $email)
-                        .modifier(CustomTextFieldStyle())
+                    Spacer()
 
-                    SecureField("Password", text: $password)
-                        .modifier(CustomTextFieldStyle())
+                    ZStack(alignment: .trailing) {
+                        TextField("E-mail", text: $email)
+                            .modifier(CustomTextFieldStyle())
+                        
+                        Image(systemName: "envelope.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20, height: 20)
+                            .foregroundColor(.gray)
+                            .padding(.trailing, 32)
+                    }
+                    
+                    ZStack(alignment: .trailing) {
+                        SecureField("Password", text: $password)
+                            .modifier(CustomTextFieldStyle())
+
+                        Image(systemName: "lock.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20, height: 20)
+                            .foregroundColor(.gray)
+                            .padding(.trailing, 32)
+                    }
+
+                    HStack {
+                        NavigationLink("Forgot Password?") {
+                            ForgotPasswordView()
+                        }
+                        .foregroundStyle(.white)
+                        .opacity(0.8)
+                        .font(.subheadline)
+
+                        Spacer()
+                    }
+                    .padding(.horizontal, 24)
+                    
+                    Spacer()
                     
                     Button {
                         isLoading = true
                         
-                        loginViewModel.login(email: email, password: password) { isSuccess, errorDesc in
-                            if isSuccess {
+                        loginViewModel.login(email: email, password: password) { isSuccessful, description in
+                            if isSuccessful {
                                 NavigationLink("") {
                                     HomeView()
                                 }
                             } else {
                                 isLoading = false
-                                self.errorDesc = errorDesc
+                                self.description = description
                                 showAlert.toggle()
                             }
                         }
@@ -87,7 +115,7 @@ struct LoginView: View {
                     .alert(isPresented: $showAlert) {
                         Alert(
                             title: Text("Error"),
-                            message: Text(errorDesc)
+                            message: Text(description)
                         )
                     }
                     
@@ -134,5 +162,5 @@ struct CustomTextFieldStyle: ViewModifier {
 }
 
 #Preview {
-    LoginView(email: "", password: "")
+    LoginView()
 }

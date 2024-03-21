@@ -30,7 +30,7 @@ struct NetflixCloneApp: App {
     
     var body: some Scene {
         WindowGroup {
-            LoginView(email: "", password: "")
+            LoginView()
                 .preferredColorScheme(.dark)
                 .environmentObject(loginViewModel)
                 .environmentObject(favoriteViewModel)
