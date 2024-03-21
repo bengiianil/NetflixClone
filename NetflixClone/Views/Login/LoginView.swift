@@ -8,72 +8,102 @@
 import FirebaseAuth
 import SwiftUI
 
+enum LoginErrors: String {
+    case invalidData = "You have entered invalid data"
+    case notMatchPassword = "The passwords you entered do not match"
+    case customCase = ""
+}
+
 struct LoginView: View {
+    @EnvironmentObject private var loginViewModel: LoginViewModel
     @State var email: String
     @State var password: String
     @State var isLoggedIn: Bool = false
     @State private var isLoading = false
-
+    @State private var isRegisterTapped = false
+    @State var showAlert: Bool = false
+    @State private var errorDesc = LoginErrors.invalidData.rawValue
+    
     var body: some View {
         if isLoggedIn {
             TabBarView()
         } else {
-            VStack(spacing: 24) {
-                
-                Spacer()
-  
-                HStack {
-                    Image(systemName: "movieclapper.fill")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 80, height: 80)
+            NavigationView {
+                VStack(spacing: 24){
+                    Spacer()
+      
+                    HStack {
+                        Image(systemName: "movieclapper.fill")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 80, height: 80)
+                        
+                        Text("MovieLABS")
+                            .font(.largeTitle)
+                            .bold()
+                        Spacer()
+                    }
+                    .padding()
+           
+                    TextField("E-mail", text: $email)
+                        .modifier(CustomTextFieldStyle())
+
+                    SecureField("Password", text: $password)
+                        .modifier(CustomTextFieldStyle())
                     
-                    Text("MovieLABS")
-                        .font(.largeTitle)
-                        .bold()
+                    Button {
+                        isLoading = true
+                        
+                        loginViewModel.login(email: email, password: password) { isSuccess, errorDesc in
+                            if isSuccess {
+                                NavigationLink("") {
+                                    HomeView()
+                                }
+                            } else {
+                                isLoading = false
+                                self.errorDesc = errorDesc
+                                showAlert.toggle()
+                            }
+                        }
+                    } label: {
+                        if isLoading {
+                            ProgressView()
+                                .padding()
+                                .frame(maxWidth: .infinity)
+                                .background(Color.gray)
+                                .cornerRadius(12)
+                                .foregroundColor(.white)
+                        } else {
+                            Text("Login")
+                                .padding()
+                                .frame(maxWidth: .infinity)
+                                .foregroundStyle(.white)
+                                .background(Color.red)
+                                .cornerRadius(12)
+                                .bold()
+                        }
+                    }
+                    .padding(.horizontal, 24)
+                    .alert(isPresented: $showAlert) {
+                        Alert(
+                            title: Text("Error"),
+                            message: Text(errorDesc)
+                        )
+                    }
+                    
+                    Spacer()
+                    Text("Do not have an account?")
+                    
+                 
+                    NavigationLink {
+                        RegisterView()
+                    } label: {
+                         Text("Register")
+                             .foregroundStyle(.blue)
+                    }
+
                     Spacer()
                 }
-                .padding()
-       
-                TextField("E-mail", text: $email)
-                    .modifier(CustomTextFieldStyle())
-
-                SecureField("Password", text: $password)
-                    .modifier(CustomTextFieldStyle())
-
-//                Spacer()
-                Button {
-                    login()
-                } label: {
-                    Text("Login")
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .foregroundStyle(.white)
-                        .background(Color.red)
-                        .cornerRadius(12)
-                        .bold()
-                }
-                .padding(.horizontal, 24)
-                
-                Spacer()
-                Text("Do not have an account?")
-                Button {
-                    isLoading = true
-                    register()
-                } label: {
-                    if isLoading {
-                         ProgressView()
-                             .padding()
-                             .frame(maxWidth: .infinity)
-                             .background(Color.gray)
-                             .cornerRadius(12)
-                             .foregroundColor(.white)
-                     } else {
-                         Text("Register")
-                     }               
-                }
-
-                Spacer()
             }
             .padding()
             .onAppear {
@@ -86,26 +116,7 @@ struct LoginView: View {
         }
     }
     
-    func register() {
-        Auth.auth().createUser(withEmail: email, password: password) { result, error in
-            if let error = error {
-                isLoading = false
-                print(error.localizedDescription)
-            } else {
-                print("Register successful!")
-            }
-        }
-    }
-    
-    func login() {
-        Auth.auth().signIn(withEmail: email, password: password) { result, error in
-            if let error = error {
-                print(error.localizedDescription)
-            } else {
-                print("Login successful!")
-            }
-        }
-    }
+
 }
 
 struct CustomTextFieldStyle: ViewModifier {

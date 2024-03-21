@@ -44,6 +44,8 @@
 		B96C51C92B7FC47500602408 /* SliderListCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96C51C82B7FC47500602408 /* SliderListCode.swift */; };
 		B97BA3192B85007E00ACC285 /* MovieDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97BA3182B85007E00ACC285 /* MovieDetailView.swift */; };
 		B97BA31B2B8533EC00ACC285 /* GenreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B97BA31A2B8533EC00ACC285 /* GenreModel.swift */; };
+		B9E596EE2BAC56B300FA3BF6 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E596ED2BAC56B300FA3BF6 /* RegisterView.swift */; };
+		B9E596F02BAC56C000FA3BF6 /* ForgetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E596EF2BAC56C000FA3BF6 /* ForgetPasswordView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +80,8 @@
 		B96C51C82B7FC47500602408 /* SliderListCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderListCode.swift; sourceTree = "<group>"; };
 		B97BA3182B85007E00ACC285 /* MovieDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailView.swift; sourceTree = "<group>"; };
 		B97BA31A2B8533EC00ACC285 /* GenreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreModel.swift; sourceTree = "<group>"; };
+		B9E596ED2BAC56B300FA3BF6 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		B9E596EF2BAC56C000FA3BF6 /* ForgetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -266,6 +270,8 @@
 			isa = PBXGroup;
 			children = (
 				B9567A112B90D91400258628 /* LoginView.swift */,
+				B9E596ED2BAC56B300FA3BF6 /* RegisterView.swift */,
+				B9E596EF2BAC56C000FA3BF6 /* ForgetPasswordView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -372,6 +378,7 @@
 				B9567A0E2B90BCAD00258628 /* CacheAsyncImage.swift in Sources */,
 				B9567A012B8F819D00258628 /* FilteredMovieView.swift in Sources */,
 				B97BA31B2B8533EC00ACC285 /* GenreModel.swift in Sources */,
+				B9E596F02BAC56C000FA3BF6 /* ForgetPasswordView.swift in Sources */,
 				B93CD3812B963AE7009BCA81 /* LoginViewModel.swift in Sources */,
 				B9567A0B2B8FCEF200258628 /* RatingView.swift in Sources */,
 				B96C51C92B7FC47500602408 /* SliderListCode.swift in Sources */,
@@ -380,6 +387,7 @@
 				B910A2BF2B697CF8000B9293 /* NetworkManager.swift in Sources */,
 				B9567A122B90D91400258628 /* LoginView.swift in Sources */,
 				B97BA3192B85007E00ACC285 /* MovieDetailView.swift in Sources */,
+				B9E596EE2BAC56B300FA3BF6 /* RegisterView.swift in Sources */,
 				B9567A032B8F8D7B00258628 /* MainMovieView.swift in Sources */,
 				B910A2BD2B697CE7000B9293 /* MovieModel.swift in Sources */,
 				B95679EC2B8D0E4600258628 /* LinearGradientView.swift in Sources */,

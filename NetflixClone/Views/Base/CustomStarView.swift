@@ -8,20 +8,20 @@
 import SwiftUI
 
 struct CustomStarView: View {
+    @EnvironmentObject private var favoriteViewModel: FavoriteViewModel
     let item: Results
-    @EnvironmentObject private var favorites: FavoriteViewModel
 
     var body: some View {
         HStack {
-            var favoriteState = favorites.contains(movie: item)
+            var favoriteState = favoriteViewModel.contains(movie: item)
 
             Spacer()
             Button {
                 favoriteState.toggle()
-                if favorites.contains(movie: item) {
-                    favorites.remove(movie: item)
+                if favoriteViewModel.contains(movie: item) {
+                    favoriteViewModel.remove(movie: item)
                 } else {
-                    favorites.add(movie: item)
+                    favoriteViewModel.add(movie: item)
                 }
 
             } label: {

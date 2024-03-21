@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct FavoriteView: View {
-    @EnvironmentObject private var favorites: FavoriteViewModel
-    @State private var searchText = ""
+    @EnvironmentObject private var favoriteViewModel: FavoriteViewModel
     @ObservedObject var viewModel = MovieViewModel()
+    @State private var searchText = ""
 
     var body: some View {
         NavigationView {
@@ -33,9 +33,9 @@ struct FavoriteView: View {
     
     var filteredFavMovies: [Results] {
         if !searchText.isEmpty {
-            return favorites.favMovies.filter { $0.title.localizedCaseInsensitiveContains(searchText) }
+            return favoriteViewModel.favMovies.filter { $0.title.localizedCaseInsensitiveContains(searchText) }
         } else {
-            return favorites.favMovies
+            return favoriteViewModel.favMovies
         }
     }
 }
