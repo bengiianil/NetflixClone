@@ -11,7 +11,10 @@ struct FavoriteView: View {
     @EnvironmentObject private var favoriteViewModel: FavoriteViewModel
     @ObservedObject var viewModel = MovieViewModel()
     @State private var searchText = ""
-
+    @State private var showAlert: Bool = false
+    @State private var showLogin: Bool = false
+    @State private var description = LoginAlert.invalidData.rawValue
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -27,6 +30,32 @@ struct FavoriteView: View {
                 .listRowSeparator(.visible)
             }
             .navigationTitle("Favorites")
+            .navigationBarItems(trailing:
+                Button {
+                    showAlert.toggle()
+                    LoginViewModel.shared.signOut { isSuccessful, error  in
+                        self.description = error
+                    }
+                 } label: {
+                     Text("Sign Out")
+                         .foregroundStyle(.white)
+                 }
+                .alert(isPresented: $showAlert) {
+                    Alert(
+                        title: Text("Error"),
+                        message: Text(LoginAlert.signOut.rawValue),
+                        primaryButton: .default(Text("OK")) {
+                            showLogin = true
+                        },
+                        secondaryButton: .cancel(Text("Cancel")) {
+                            print("Cancel button tapped")
+                        }
+                    )
+                }
+                .fullScreenCover(isPresented: $showLogin) {
+                    LoginView()
+                }
+            )
             .searchable(text: $searchText, prompt: "Search for movie")
         }
     }

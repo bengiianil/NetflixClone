@@ -9,18 +9,31 @@ import FirebaseAuth
 import SwiftUI
 
 struct ProfileView: View {
+    @Environment(\.presentationMode) var presentationMode
     @State private var shouldNavigateToLogin = false
 
     var body: some View {
         VStack {
-            if let username = UserDefaults.standard.string(forKey: "username") {
-                Text("Hello \(username),")
+            Spacer()
+
+            HStack {
+                Text("Hello A,")
                     .font(.largeTitle)
+
+                if let username = UserDefaults.standard.string(forKey: "username") {
+                    Text("Hello \(username),")
+                        .font(.largeTitle)
+                }
+                Spacer()
             }
+            
+            Spacer()
+          
             
             Button("Sign Out") {
                 signOut()
                 shouldNavigateToLogin = true
+                presentationMode.wrappedValue.dismiss()
             }
             .padding()
             .background(Color.blue)
@@ -28,13 +41,15 @@ struct ProfileView: View {
             .cornerRadius(10)
             .padding()
             
-            NavigationLink(
-                 destination: LoginView(),
-                 isActive: $shouldNavigateToLogin
-             ) {
-                 EmptyView()
-             }
+            if shouldNavigateToLogin {
+                NavigationLink("") {
+                    LoginView()
+                }
+            }
+            Spacer()
+
         }
+        .padding()
     }
     
     func signOut() {

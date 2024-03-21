@@ -18,7 +18,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct NetflixCloneApp: App {
     @Environment(\.colorScheme) var colorScheme
-    @StateObject private var loginViewModel = LoginViewModel()
+//    @StateObject private var loginViewModel = LoginViewModel()
     @StateObject private var favoriteViewModel = FavoriteViewModel()
 
     /// register app delegate for firebase setup
@@ -32,7 +32,7 @@ struct NetflixCloneApp: App {
         WindowGroup {
             LoginView()
                 .preferredColorScheme(.dark)
-                .environmentObject(loginViewModel)
+//                .environmentObject(loginViewModel)
                 .environmentObject(favoriteViewModel)
         }
     }

@@ -22,11 +22,11 @@ struct TabBarView: View {
                     Text("Favorite")
                 }
             
-            ProfileView()
-                .tabItem {
-                    Image(systemName: "person")
-                    Text("Profile")
-                }
+//            ProfileView()
+//                .tabItem {
+//                    Image(systemName: "person")
+//                    Text("Profile")
+//                }
         }
         .accentColor(Color.white)
     }

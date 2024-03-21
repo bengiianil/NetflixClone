@@ -9,7 +9,6 @@ import FirebaseAuth
 import SwiftUI
 
 struct LoginView: View {
-    @EnvironmentObject private var loginViewModel: LoginViewModel
     @State var email: String = ""
     @State var password: String = ""
     @State var isLoggedIn: Bool = false
@@ -82,7 +81,7 @@ struct LoginView: View {
                     Button {
                         isLoading = true
                         
-                        loginViewModel.login(email: email, password: password) { isSuccessful, description in
+                        LoginViewModel.shared.login(email: email, password: password) { isSuccessful, description in
                             if isSuccessful {
                                 NavigationLink("") {
                                     HomeView()

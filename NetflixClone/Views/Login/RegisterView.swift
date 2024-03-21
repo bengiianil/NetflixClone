@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct RegisterView: View {
-    @EnvironmentObject private var loginViewModel: LoginViewModel
     @State var name: String = ""
     @State var email: String = ""
     @State var password: String = ""
@@ -49,7 +48,7 @@ struct RegisterView: View {
                 isLoading = true
 
                 if password == passwordAgain {
-                    loginViewModel.register(name: name, email: email, password: password) { isSuccessful, description in
+                    LoginViewModel.shared.register(name: name, email: email, password: password) { isSuccessful, description in
                         if isSuccessful {
                             UserDefaults.standard.set(name, forKey: "username")
                             NavigationLink("") {

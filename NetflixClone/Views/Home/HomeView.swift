@@ -15,6 +15,9 @@ struct HomeView: View {
     
     @State private var searchText = ""
     @State private var currentPage = 0
+    @State private var showAlert: Bool = false
+    @State private var showLogin: Bool = false
+    @State private var description = LoginAlert.invalidData.rawValue
 
     var body: some View {
         NavigationView {
@@ -48,6 +51,32 @@ struct HomeView: View {
             }
             .padding()
             .navigationTitle("MovieLABS")
+            .navigationBarItems(trailing:
+                Button {
+                    showAlert.toggle()
+                    LoginViewModel.shared.signOut { isSuccessful, error  in
+                        self.description = error
+                    }
+                 } label: {
+                     Text("Sign Out")
+                         .foregroundStyle(.white)
+                 }
+                .alert(isPresented: $showAlert) {
+                    Alert(
+                        title: Text("Error"),
+                        message: Text(LoginAlert.signOut.rawValue),
+                        primaryButton: .default(Text("OK")) {
+                            showLogin = true
+                        },
+                        secondaryButton: .cancel(Text("Cancel")) {
+                            print("Cancel button tapped")
+                        }
+                    )
+                }
+                .fullScreenCover(isPresented: $showLogin) {
+                    LoginView()
+                }
+            )
             .searchable(text: $searchText, prompt: "Search for movie")
         }
     }

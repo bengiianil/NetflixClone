@@ -8,13 +8,12 @@
 import SwiftUI
 
 struct ForgotPasswordView: View {
-    @EnvironmentObject private var loginViewModel: LoginViewModel
+    @Environment(\.presentationMode) var presentationMode
     @State var email: String = ""
     @State var showAlert: Bool = false
     @State private var isLoading = false
     @State private var description = LoginAlert.invalidData.rawValue
     @State private var isSuccessful = false
-    @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
         VStack(spacing: 20) {
@@ -23,9 +22,9 @@ struct ForgotPasswordView: View {
             
             Button {
                 isLoading = true
-                loginViewModel.checkIfUserExists(email: email) { isRegistered, registerDesc in
+                LoginViewModel.shared.checkIfUserExists(email: email) { isRegistered, registerDesc in
                     if isRegistered {
-                        loginViewModel.forgotPassword(email: email) { isSuccessful, description in
+                        LoginViewModel.shared.forgotPassword(email: email) { isSuccessful, description in
                             isLoading = false
                             self.isSuccessful = isSuccessful
                             self.description = description
