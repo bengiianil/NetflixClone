@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct SliderMovieView: View {
+    @ObservedObject private var viewModel = MovieViewModel()
     @State var index: Int
-    @ObservedObject var viewModel = MovieViewModel()
 
     var body: some View {
         VStack(alignment: .leading) {

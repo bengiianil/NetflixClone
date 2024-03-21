@@ -9,8 +9,8 @@ import SwiftUI
 
 struct ForgotPasswordView: View {
     @Environment(\.presentationMode) var presentationMode
-    @State var email: String = ""
-    @State var showAlert: Bool = false
+    @State private var email: String = ""
+    @State private var showAlert: Bool = false
     @State private var isLoading = false
     @State private var description = LoginAlert.invalidData.rawValue
     @State private var isSuccessful = false

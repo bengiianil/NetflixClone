@@ -9,12 +9,12 @@ import FirebaseAuth
 import SwiftUI
 
 struct LoginView: View {
-    @State var email: String = ""
-    @State var password: String = ""
-    @State var isLoggedIn: Bool = false
+    @State private var email: String = ""
+    @State private var password: String = ""
+    @State private var isLoggedIn: Bool = false
     @State private var isLoading = false
     @State private var isRegisterTapped = false
-    @State var showAlert: Bool = false
+    @State private var showAlert: Bool = false
     @State private var description = LoginAlert.invalidData.rawValue
     
     var body: some View {

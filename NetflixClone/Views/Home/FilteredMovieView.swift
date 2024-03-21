@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct FilteredMovieView: View {
-    @ObservedObject var viewModel = MovieViewModel()
+    @ObservedObject private var viewModel = MovieViewModel()
     @Binding var searchText: String
     
     var body: some View {

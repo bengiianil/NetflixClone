@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MainMovieView: View {
-    @ObservedObject var viewModel = MovieViewModel()
+    @ObservedObject private var viewModel = MovieViewModel()
     @State private var currentPage = 0
     private let path = SliderCode(rawValue: 3)?.path
 

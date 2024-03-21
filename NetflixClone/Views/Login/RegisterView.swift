@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct RegisterView: View {
-    @State var name: String = ""
-    @State var email: String = ""
-    @State var password: String = ""
-    @State var passwordAgain: String = ""
-    @State var showAlert: Bool = false
+    @State private var name: String = ""
+    @State private var email: String = ""
+    @State private var password: String = ""
+    @State private var passwordAgain: String = ""
+    @State private var showAlert: Bool = false
     @State private var isLoading = false
     @State private var description = LoginAlert.invalidData.rawValue
 
@@ -95,5 +95,5 @@ struct RegisterView: View {
 }
 
 #Preview {
-    RegisterView(name: "", email: "", password: "")
+    RegisterView()
 }

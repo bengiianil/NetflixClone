@@ -24,7 +24,7 @@ struct FavoriteView: View {
                             MovieDetailView(item: favorite, genres: genreModel)
                         }
                     } label: {
-                        FavRowView(item: favorite, searchText: searchText, viewModel: viewModel)
+                        FavRowView(viewModel: viewModel, item: favorite, searchText: searchText)
                     }
                 }
                 .listRowSeparator(.visible)

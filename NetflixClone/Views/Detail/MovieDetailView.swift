@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct MovieDetailView: View {
+    @ObservedObject private var viewModel = MovieViewModel()
     let item: Results
     let genres: Genres
-    @ObservedObject var viewModel = MovieViewModel()
 
     var body: some View {
         ScrollView {

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MovieView: View {
-    let path = SliderCode(rawValue: 0)?.path
+    private let path = SliderCode(rawValue: 0)?.path
     let url: String
 
     var body: some View {
