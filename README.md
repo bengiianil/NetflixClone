@@ -1,6 +1,6 @@
 # NetflixSwiftUI
 
-It is an iOS application that allows users to discover movies, view details, and manage their favorites using MVVM architecture. It utilizes the TMDB API for fetching movie data a nd Firebase for user authentication and storing favorites.
+It is an iOS application that allows users to discover movies, view details, and manage their favorites using MVVM architecture. It utilizes the TMDB API for fetching movie data and Firebase for user authentication and storing favorites.
 
 ## Key Features
 
